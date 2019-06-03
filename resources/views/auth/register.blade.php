@@ -36,6 +36,20 @@
         </form>
 
     </div>
+
+    {{-- @if(count($errors->all()) > 0)
+
+        @foreach ($errors->all() as $error)
+            <div class="form-grup">
+                <div class="alert alert-danger">
+                    <p>
+                        {{ $error }}
+                    </p>
+                </div>
+            </div>
+        @endforeach
+    @endif --}}
+
 @endsection
 
 

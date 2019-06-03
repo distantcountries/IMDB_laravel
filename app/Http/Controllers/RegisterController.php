@@ -8,6 +8,9 @@ use App\User;
 class RegisterController extends Controller
 
 {
+    public function __construct() {
+        $this->middleware('guest', ['except'=>'destroy']);
+    }
     
     public function create()
     {
@@ -29,7 +32,7 @@ class RegisterController extends Controller
 
         auth()->login($user); 
 
-        return redirect()->route('all_teams');
+        return redirect('/');
     }
 }
 

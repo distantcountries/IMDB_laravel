@@ -13,6 +13,12 @@
 <body>
 
     @include('layouts.header')
+    
+    @if($flash = session('message'))
+        <div class="alert alert-success" role="alert"> 
+            {{ $flash }}
+        </div>
+    @endif
 
     @yield('content')
 
