@@ -2,54 +2,48 @@
 
 @section('content')
 
-    <div style="padding:2rem">
-        <h2>Login</h2>
-        <hr>
+  
 
+    <div style="width:40%;">
         <form method="POST" action="/login">
             {{ csrf_field() }}
+            <h1>Login</h1>
+            <br>
 
             <div class="form-group">
                 <label for="email">Email</label>
-                <input type="text" id="email" name="email" class="form-control" />
-                @include('layouts.errors' , ['fieldTitle' => 'email'])
+                <input type="email" name="email" class="form-control" placeholder="Your email">
+                @include('partials.error-message' , ['fieldTitle' => 'email'])
             </div>
 
             <div class="form-group">
                 <label for="password">Password</label>
-                <input type="password" id="password" name="password" class="form-control" />
-                @include('layouts.errors' , ['fieldTitle' => 'password'])
+                <input type="password" name="password" class="form-control" placeholder="Your password">
+                @include('partials.error-message' , ['fieldTitle' => 'password'])
             </div>
 
-            <div class="form-group">
-                <button type="submit"
-                    style="
-                        width: 100%;
-                        background-color: #ccd9ff;
-                        padding: 14px 20px;
-                        margin: 8px 0;
-                        border: none;
-                        border-radius: 4px;
-                        cursor: pointer;"
-                    onmouseover="this.style.background='#cce6ff'"
-                    onmouseout="this.style.background='#ccd9ff'"> Submit </button>
-            </div>
-
+            <button type="submit" class="btn btn-primary">Submit</button>
+        
         </form>
+
     </div>
 
-    @if(count($errors->all()) > 0)
 
-        @foreach ($errors->all() as $error)
-            <div class="form-grup">
-                <div class="alert alert-danger">
-                    <p>
+
+        <!-- @if(count($errors->all()) > 0)
+            @foreach ($errors->all() as $error)
+                <div class="form-grup">
+                    <div class="alert alert-danger">
                         {{ $error }}
-                    </p>
+                    </div>
                 </div>
-            </div>
-        @endforeach
-    @endif
-       
+            @endforeach
+        @endif -->
+
+
+
+
+
+
 
 @endsection

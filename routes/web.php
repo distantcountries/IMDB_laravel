@@ -15,16 +15,20 @@
 //     return view('welcome');
 // });
 
-Route::get('/', ['as' => 'all_teams', 
-                    'uses' => 'TeamsController@index']);
-
-Route::get('/teams/{id}', 'TeamsController@show');
+Route::get('/', 'TeamsController@index');
+Route::get('/teams', 'TeamsController@index');
+Route::get('/teams/{id}', ['as' => 'single-team', 'uses' => 'TeamsController@show']);
+Route::post('/teams/{team_id}/comments', ['as' => 'team-comments', 'uses' => 'CommentsController@store']);
 
 Route::get('/players/{id}', 'PlayersController@show');
 
-Route::get('/register', 'RegisterController@create');
+Route::get('/register', 'RegisterController@index');
 Route::post('/register', 'RegisterController@store');
 
-Route::get('/logout', 'LoginController@destroy');
+Route::get('/login', 'LoginController@index');
 Route::post('/login', 'LoginController@store');
-Route::get('/login', 'LoginController@create');
+Route::get('/logout', 'LoginController@destroy');
+
+Route::post('/teams/{team_id}/comments', ['as' => 'team-comments', 'uses' => 'CommentsController@store']);
+
+Route::get('/verification/{id}', 'LoginController@verification');

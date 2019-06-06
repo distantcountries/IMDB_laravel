@@ -6,38 +6,30 @@ use Illuminate\Http\Request;
 use App\User;
 
 class RegisterController extends Controller
-
 {
-    public function __construct() {
-        $this->middleware('guest', ['except'=>'destroy']);
+    public function __construct()
+    {
+        $this->middleware('guest');
     }
-    
-    public function create()
+
+    public function index()
     {
         return view('auth.register');
     }
 
-    public function store(Request $request)
+    public function store()
     {
         $this->validate(request(), User::STORE_RULES);
-  
+
         $user = new User;
-        
+
         $user->name = request('name');
         $user->email = request('email');
         $user->password = bcrypt(request('password'));
-        $user->password = bcrypt(request('password_conf')); //zastiti password, dodaje simbole
 
         $user->save();
-
-        auth()->login($user); 
-
-        return redirect('/');
+        auth()->login($user);
+        session()->flash('Thanx for registration!'); //sesija koja se kreira nakon registracije
+        return redirect('/login');
     }
 }
-
-
-
-
-
-?>

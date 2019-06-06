@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class Players extends Migration
+class CreateCommentsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,15 @@ class Players extends Migration
      */
     public function up()
     {
-        Schema::create('players', function (Blueprint $table) {
+        Schema::create('comments', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('first_name');
-            $table->string('last_name');
-            $table->string('email')->unique();
+            $table->string('content');
+
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+
             $table->unsignedBigInteger('team_id');
-            $table->foreign('team_id')
-                ->references('id')
-                ->on('teams') 
-                ->onDelete('cascade'); 
+            $table->foreign('team_id')->references('id')->on('teams')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -34,7 +33,6 @@ class Players extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('players');
+        Schema::dropIfExists('comments');
     }
 }
-

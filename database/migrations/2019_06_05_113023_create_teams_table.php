@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class Comments extends Migration
+class CreateTeamsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,12 @@ class Comments extends Migration
      */
     public function up()
     {
-        Schema::create('comments', function (Blueprint $table) {
+        Schema::create('teams', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('content');
-            $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')
-                ->references('id')
-                ->on('users') 
-                ->onDelete('cascade'); 
+            $table->string('name');
+            $table->string('email')->unique();
+            $table->string('adress');
+            $table->string('city');
             $table->timestamps();
         });
     }
@@ -32,10 +30,6 @@ class Comments extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('comments');
+        Schema::dropIfExists('teams');
     }
 }
-
-
-
-
