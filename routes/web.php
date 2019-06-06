@@ -34,4 +34,5 @@ Route::get('/logout', 'LoginController@destroy');
 Route::post('/teams/{team_id}/comments', ['as' => 'team-comments', 'uses' => 'CommentsController@store']);
 
 Route::get('/verification/{id}', 'LoginController@verification');
-// Route::get('VerifyEmailFirst', 'LoginController@verification');//dodato
+
+Route::get('/news','NewsController@index' );
