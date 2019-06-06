@@ -22,7 +22,6 @@ class RudeWords
                 return response(view('partials.forbidden-words'));
             }
         }
-
         return $next($request);
     }
 }

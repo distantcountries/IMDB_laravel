@@ -25,6 +25,8 @@ Route::get('/players/{id}', 'PlayersController@show');
 Route::get('/register', 'RegisterController@index');
 Route::post('/register', 'RegisterController@store');
 
+// Auth::routes(['verify' => true]);
+
 Route::get('/login', 'LoginController@index');
 Route::post('/login', 'LoginController@store');
 Route::get('/logout', 'LoginController@destroy');
@@ -32,3 +34,4 @@ Route::get('/logout', 'LoginController@destroy');
 Route::post('/teams/{team_id}/comments', ['as' => 'team-comments', 'uses' => 'CommentsController@store']);
 
 Route::get('/verification/{id}', 'LoginController@verification');
+// Route::get('VerifyEmailFirst', 'LoginController@verification');//dodato

@@ -22,23 +22,26 @@ class LoginController extends Controller
     {
         $this->validate(request(), User::LOG_RULES);
 
-        if (!auth()->attempt(request(['email', 'password']))) {
+        if(!auth()->attempt(request(['email', 'password'])
+        )) {
             return back()->withErrors([
-                'message' => 'Error, please try again.'
+                'message' => "Bad credentials. Please try again."
             ]);
         } else {
-
             if(auth()->user()->is_verified) {
+                session()->flash('message', 'Thanx for registration!');
                 return redirect('/');
             } else {
                 $this->destroy();
-                return back()->withErrors(['message' => 'Please verify your account!']);
+                return back()->withErrors([
+                    'message' => "You must verify your account."
+                ]);
             }
         }
-
-        // session()->flash('Hello!');
+        // session()->flash('message', 'Thanx for registration!');
         // return redirect('/');
     }
+        
 
     public function destroy()
     {

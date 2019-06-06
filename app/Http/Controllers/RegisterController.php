@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use App\Mail\MailVerification;
 
 class RegisterController extends Controller
 {
@@ -28,8 +29,14 @@ class RegisterController extends Controller
         $user->password = bcrypt(request('password'));
 
         $user->save();
-        auth()->login($user);
-        session()->flash('Thanx for registration!'); //sesija koja se kreira nakon registracije
+        
+        \Mail::to($user->email)->send(new MailVerification($user));
+     ;
+        // auth()->login($user);
+        session()->flash('Thanx for registration!'); 
+        
+        // return redirect(route('VerifyEmailFirst'));//dodato
+
         return redirect('/login');
     }
 }
